@@ -39,3 +39,12 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+
+
+module TwitterAuth
+  def self.config(environment=RAILS_ENV)
+    @config ||= {}
+    @config[environment] ||= YAML.load(ERB.new(File.read(RAILS_ROOT + '/config/twitter_auth.yml')).result)[environment]
+    #@config[environment] ||= YAML.load(File.open(RAILS_ROOT + '/config/twitter_auth.yml').read)[environment]
+  end
+end
