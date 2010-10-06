@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "/messages/index" do
   context "ログインしている場合" do  
     before do
-      template.stub(:logged_in?).and_return(true)
+      template.stub!(:logged_in?).and_return(true)
       render 'messages/index'
     end
 
@@ -14,7 +14,7 @@ describe "/messages/index" do
 
   context "ログインしていない場合" do
     before do
-      template.stub(:logged_in?).and_return(false)
+      template.stub!(:logged_in?).and_return(false)
       render 'messages/index'
     end
 
