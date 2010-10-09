@@ -21,4 +21,8 @@ class MessagesController < ApplicationController
       render :action  => 'index'
     end
   end
+  
+  def list
+    @statuses = current_user.twitter.get("http://search.twitter.com/search.json?q=#{CGI.escape '偉大なるHelloWorld'}")
+  end
 end

@@ -51,4 +51,23 @@ Spec::Runner.configure do |config|
   # == Notes
   #
   # For more information take a look at Spec::Runner::Configuration and Spec::Runner
+
+  def dummy_search
+    {"max_id"=>26835747788,
+     "results"=>(1..3).map{ |tid| dummy_tweet(tid) }
+    }
+  end
+  
+  def dummy_tweet(id)
+    {"id"=>id,
+      "created_at"=>"Sat, 09 Oct 2010 11:40:15 +0000",
+      "profile_image_url"=>"http://example.com/profile_images/pi.png",
+      "from_user"=>"username#{id}",
+      "text"=>"偉大なるHelloWorld",
+      "to_user_id"=>nil,
+      "geo"=>nil,
+      "from_user_id"=>id,
+      "iso_language_code"=>"ja",
+      "source"=>"web"}
+  end
 end
