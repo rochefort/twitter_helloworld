@@ -49,9 +49,26 @@ describe MessagesController do
       it { response.code.should == '500' }
     end
   end
+
+  describe "GET 'list'" do
+    context "偉大なるHelloWorldを検索し、検索結果が0件でない場合" do
+      before do
+        get_search_stub.and_return(dummy_search)
+        get 'list'
+      end
+      it { response.should be_success }
+      it { response.should render_template('list') }
+      it { assigns[:statuses].should_not be_empty }
+    end
+  end
   
+  private
   def post_tweet_stub
     controller.stub_chain(:current_user, :twitter, :post).with('/statuses/update.json', :status => "偉大なるHelloWorld")
+  end
+
+  def get_search_stub
+    controller.stub_chain(:current_user, :twitter, :get).with("http://search.twitter.com/search.json?q=#{CGI.escape '偉大なるHelloWorld'}")
   end
 
 end
